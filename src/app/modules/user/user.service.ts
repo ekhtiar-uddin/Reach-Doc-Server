@@ -1,9 +1,16 @@
 import bcrypt from "bcryptjs";
 import { Request } from "express";
-import { Admin, Doctor } from "../../../../prisma/src/generated/prisma/client";
+import {
+  Admin,
+  Doctor,
+  Prisma,
+} from "../../../../prisma/src/generated/prisma/client";
 import { UserRole } from "../../../../prisma/src/generated/prisma/enums";
 import { fileUploader } from "../../helper/fileUploader";
+import { IOptions, paginationHelper } from "../../helper/paginationHelper";
 import { prisma } from "../../shared/prisma";
+import { userSearchableFields } from "./user.constant";
+// import { Prisma } from "../../../../prisma/src/generated/prisma/browser";
 const createPatient = async (req: Request) => {
   if (req.file) {
     const uploadedResult = await fileUploader.uploadToCloudinary(req.file);
@@ -89,44 +96,62 @@ const createDoctor = async (req: Request): Promise<Doctor> => {
   return result;
 };
 
-const getAllFromDB = async ({
-  page,
-  limit,
-  searchTerm,
-  sortOrder,
-  sortBy,
-}: {
-  page?: number;
-  limit?: number;
-  searchTerm?: string;
-  sortBy?: any;
-  sortOrder?: any;
-}) => {
-  const pageNumber = page || 1;
-  const limitNumber = limit || 10;
+const getAllFromDB = async (params: any, options: IOptions) => {
+  const { page, limit, skip, sortBy, sortOrder } =
+    paginationHelper.calculatePagination(options);
+  const { searchTerm, ...filterData } = params;
 
-  const skip = (pageNumber - 1) * limitNumber;
+  const andConditions: Prisma.UserWhereInput[] = [];
+
+  if (searchTerm) {
+    andConditions.push({
+      OR: userSearchableFields.map((field) => ({
+        [field]: {
+          contains: searchTerm,
+          mode: "insensitive",
+        },
+      })),
+    });
+  }
+
+  if (Object.keys(filterData).length > 0) {
+    andConditions.push({
+      AND: Object.keys(filterData).map((key) => ({
+        [key]: {
+          equals: (filterData as any)[key],
+        },
+      })),
+    });
+  }
+
+  const whereConditions: Prisma.UserWhereInput =
+    andConditions.length > 0
+      ? {
+          AND: andConditions,
+        }
+      : {};
+
   const result = await prisma.user.findMany({
     skip,
-    take: limitNumber,
-    where: searchTerm
-      ? {
-          email: {
-            contains: searchTerm,
-            mode: "insensitive",
-          },
-        }
-      : {},
-    orderBy:
-      sortBy && sortOrder
-        ? {
-            [sortBy]: sortOrder,
-          }
-        : {
-            createdAt: "asc",
-          },
+    take: limit,
+
+    where: whereConditions,
+    orderBy: {
+      [sortBy]: sortOrder,
+    },
   });
-  return result;
+
+  const total = await prisma.user.count({
+    where: whereConditions,
+  });
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: result,
+  };
 };
 export const UserService = {
   createPatient,
