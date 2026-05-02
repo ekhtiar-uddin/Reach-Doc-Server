@@ -159,5 +159,3 @@ export const UserService = {
   createDoctor,
   getAllFromDB,
 };
-
-// 58-2 Fetch All Users with Searching and Sorting
