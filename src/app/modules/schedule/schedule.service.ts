@@ -108,8 +108,28 @@ const schedulesForDoctor = async (
         }
       : {};
 
+  const doctorSchedules = await prisma.doctorSchedules.findMany({
+    where: {
+      doctor: {
+        email: user.email,
+      },
+    },
+    select: {
+      scheduleId: true,
+    },
+  });
+
+  const doctorSchedulesIds = doctorSchedules.map(
+    (schedule) => schedule.scheduleId,
+  );
+
   const result = await prisma.schedule.findMany({
-    where: whereConditions,
+    where: {
+      ...whereConditions,
+      id: {
+        notIn: doctorSchedulesIds,
+      },
+    },
     skip,
     take: limit,
     orderBy: {
@@ -145,7 +165,12 @@ const schedulesForDoctor = async (
   // });
 
   const total = await prisma.schedule.count({
-    where: whereConditions,
+    where: {
+      ...whereConditions,
+      id: {
+        notIn: doctorSchedulesIds,
+      },
+    },
   });
 
   return {
@@ -167,6 +192,7 @@ const deleteScheduleFromDB = async (id: string) => {
   return result;
 };
 
+// 59-8 Creating Doctor Schedule – Part 1
 export const ScheduleService = {
   insertIntoDB,
   schedulesForDoctor,
