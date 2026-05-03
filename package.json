@@ -11,7 +11,7 @@
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
     "migrate": "npx prisma migrate dev",
     "reset": "npx prisma migrate reset",
-    "commit": "git add . && git commit -m \" completed doctor serching filtering  \" && git push",
+    "commit": "git add . && git commit -m \" integrated open ai to get specific doctors according to patient symptoms  \" && git push",
     "generate": "npx prisma generate"
   },
   "dependencies": {
@@ -27,6 +27,7 @@
     "http-status": "^2.1.0",
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.1.1",
+    "openai": "^6.35.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {

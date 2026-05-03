@@ -18,4 +18,5 @@ export default {
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME as string,
     api_key: process.env.CLOUDINARY_API_KEY as string,
   },
+  openRouterApiKey: process.env.OPENROUTER_API_KEY,
 };

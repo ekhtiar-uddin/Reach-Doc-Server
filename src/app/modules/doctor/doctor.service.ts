@@ -1,13 +1,18 @@
+import httpStatus from "http-status";
 import { Prisma } from "../../../../prisma/src/generated/prisma/client";
+import ApiError from "../../errors/ApiError";
+import { extractJsonFromMessage } from "../../helper/extractJsonFromMessage";
+import { openai } from "../../helper/open-router";
 import { IOptions, paginationHelper } from "../../helper/paginationHelper";
 import { prisma } from "../../shared/prisma";
 import { doctorSearchableFields } from "./doctor.constant";
+import { IDoctorUpdateInput } from "./doctor.interface";
 
 const getAllFromDB = async (filters: any, options: IOptions) => {
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelper.calculatePagination(options);
 
-  const { searchTerm, ...filterData } = filters;
+  const { searchTerm, specialities, ...filterData } = filters;
 
   const andConditions: Prisma.DoctorWhereInput[] = [];
 
@@ -19,6 +24,21 @@ const getAllFromDB = async (filters: any, options: IOptions) => {
           mode: "insensitive",
         },
       })),
+    });
+  }
+
+  if (specialities && specialities.length > 0) {
+    andConditions.push({
+      doctorSpecialties: {
+        some: {
+          specialities: {
+            title: {
+              contains: specialities,
+              mode: "insensitive",
+            },
+          },
+        },
+      },
     });
   }
 
@@ -43,6 +63,13 @@ const getAllFromDB = async (filters: any, options: IOptions) => {
     orderBy: {
       [sortBy]: sortOrder,
     },
+    include: {
+      doctorSpecialties: {
+        include: {
+          specialities: true,
+        },
+      },
+    },
   });
 
   const total = await prisma.doctor.count({
@@ -59,6 +86,117 @@ const getAllFromDB = async (filters: any, options: IOptions) => {
   };
 };
 
+const updateIntoDB = async (
+  id: string,
+  payload: Partial<IDoctorUpdateInput>,
+) => {
+  const doctorInfo = await prisma.doctor.findUniqueOrThrow({
+    where: {
+      id,
+    },
+  });
+
+  const { specialities, ...doctorData } = payload;
+  // Ekhane ekta arektar upor dependent tai transaction use kora hoyeche
+
+  return await prisma.$transaction(async (tnx) => {
+    if (specialities && specialities.length > 0) {
+      const deleteSpecialyIds = specialities.filter(
+        (specility) => specility.isDeleted,
+      );
+
+      for (const speciality of deleteSpecialyIds) {
+        await tnx.doctorSpecialties.deleteMany({
+          where: {
+            doctorId: id,
+            specialitiesId: speciality.specialityId,
+          },
+        });
+      }
+
+      const createSpecialityIds = specialities.filter(
+        (specility) => !specility.isDeleted,
+      );
+
+      for (const speciality of createSpecialityIds) {
+        await tnx.doctorSpecialties.create({
+          data: {
+            doctorId: id,
+            specialitiesId: speciality.specialityId,
+          },
+        });
+      }
+    }
+
+    const updatedData = await tnx.doctor.update({
+      where: {
+        id: doctorInfo.id,
+      },
+      data: doctorData,
+      include: {
+        doctorSpecialties: {
+          include: {
+            specialities: true,
+          },
+        },
+      },
+    });
+
+    return updatedData;
+  });
+};
+
+const getAISuggestions = async (payload: { symptoms: string }) => {
+  if (!(payload && payload.symptoms)) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "symptom is required");
+  }
+
+  const doctors = await prisma.doctor.findMany({
+    where: {
+      isDeleted: false,
+    },
+    include: {
+      doctorSpecialties: {
+        include: {
+          specialities: true,
+        },
+      },
+    },
+  });
+  console.log("doctors data loaded.......\n");
+  const prompt = `
+You are a medical assistant AI. Based on the patient's symptoms, suggest the top 3 most suitable doctors.
+Each doctor has specialties and years of experience.
+Only suggest doctors who are relevant to the given symptoms.
+
+Symptoms: ${payload.symptoms}
+
+Here is the doctor list (in JSON):
+${JSON.stringify(doctors, null, 2)}
+
+Return your response in JSON format with full individual doctor data. 
+`;
+  console.log("analyzing......\n");
+  const completion = await openai.chat.completions.create({
+    model: "z-ai/glm-4.5-air:free",
+    messages: [
+      {
+        role: "system",
+        content:
+          "You are a helpful AI medical assistant that provides doctor suggestions.",
+      },
+      {
+        role: "user",
+        content: prompt,
+      },
+    ],
+  });
+
+  const result = await extractJsonFromMessage(completion.choices[0].message);
+  return result;
+};
 export const DoctorService = {
   getAllFromDB,
+  updateIntoDB,
+  getAISuggestions,
 };
