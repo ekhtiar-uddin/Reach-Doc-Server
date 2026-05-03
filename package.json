@@ -11,7 +11,7 @@
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
     "migrate": "npx prisma migrate dev",
     "reset": "npx prisma migrate reset",
-    "commit": "git add . && git commit -m \" added doctor modules boilerplate code  \" && git push",
+    "commit": "git add . && git commit -m \" completed doctor serching filtering  \" && git push",
     "generate": "npx prisma generate"
   },
   "dependencies": {
