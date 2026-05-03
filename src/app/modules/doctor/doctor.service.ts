@@ -1,5 +1,9 @@
 import httpStatus from "http-status";
-import { Prisma } from "../../../../prisma/src/generated/prisma/client";
+import {
+  Doctor,
+  Prisma,
+  UserStatus,
+} from "../../../../prisma/src/generated/prisma/client";
 import ApiError from "../../errors/ApiError";
 import { extractJsonFromMessage } from "../../helper/extractJsonFromMessage";
 import { openai } from "../../helper/open-router";
@@ -145,7 +149,67 @@ const updateIntoDB = async (
     return updatedData;
   });
 };
+const getByIdFromDB = async (id: string): Promise<Doctor | null> => {
+  const result = await prisma.doctor.findUnique({
+    where: {
+      id,
+      isDeleted: false,
+    },
+    include: {
+      doctorSpecialties: {
+        include: {
+          specialities: true,
+        },
+      },
+      doctorSchedules: {
+        include: {
+          schedule: true,
+        },
+      },
+    },
+  });
+  return result;
+};
 
+const deleteFromDB = async (id: string): Promise<Doctor> => {
+  return await prisma.$transaction(async (transactionClient) => {
+    const deleteDoctor = await transactionClient.doctor.delete({
+      where: {
+        id,
+      },
+    });
+
+    await transactionClient.user.delete({
+      where: {
+        email: deleteDoctor.email,
+      },
+    });
+
+    return deleteDoctor;
+  });
+};
+
+const softDelete = async (id: string): Promise<Doctor> => {
+  return await prisma.$transaction(async (transactionClient) => {
+    const deleteDoctor = await transactionClient.doctor.update({
+      where: { id },
+      data: {
+        isDeleted: true,
+      },
+    });
+
+    await transactionClient.user.update({
+      where: {
+        email: deleteDoctor.email,
+      },
+      data: {
+        status: UserStatus.DELETED,
+      },
+    });
+
+    return deleteDoctor;
+  });
+};
 const getAISuggestions = async (payload: { symptoms: string }) => {
   if (!(payload && payload.symptoms)) {
     throw new ApiError(httpStatus.BAD_REQUEST, "symptom is required");
@@ -198,5 +262,8 @@ Return your response in JSON format with full individual doctor data.
 export const DoctorService = {
   getAllFromDB,
   updateIntoDB,
+  getByIdFromDB,
+  deleteFromDB,
+  softDelete,
   getAISuggestions,
 };

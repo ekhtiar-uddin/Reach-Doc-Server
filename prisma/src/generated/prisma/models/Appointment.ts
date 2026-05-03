@@ -291,8 +291,8 @@ export type AppointmentScalarWhereWithAggregatesInput = {
 export type AppointmentCreateInput = {
   id?: string
   videoCallingId: string
-  status: $Enums.AppointmentStatus
-  paymentStatus: $Enums.PaymentStatus
+  status?: $Enums.AppointmentStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   patient: Prisma.PatientCreateNestedOneWithoutAppointmentsInput
@@ -308,8 +308,8 @@ export type AppointmentUncheckedCreateInput = {
   doctorId: string
   scheduleId: string
   videoCallingId: string
-  status: $Enums.AppointmentStatus
-  paymentStatus: $Enums.PaymentStatus
+  status?: $Enums.AppointmentStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   payment?: Prisma.PaymentUncheckedCreateNestedOneWithoutAppointmentInput
@@ -350,8 +350,8 @@ export type AppointmentCreateManyInput = {
   doctorId: string
   scheduleId: string
   videoCallingId: string
-  status: $Enums.AppointmentStatus
-  paymentStatus: $Enums.PaymentStatus
+  status?: $Enums.AppointmentStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -601,8 +601,8 @@ export type AppointmentUncheckedUpdateManyWithoutPatientNestedInput = {
 export type AppointmentCreateWithoutPaymentInput = {
   id?: string
   videoCallingId: string
-  status: $Enums.AppointmentStatus
-  paymentStatus: $Enums.PaymentStatus
+  status?: $Enums.AppointmentStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   patient: Prisma.PatientCreateNestedOneWithoutAppointmentsInput
@@ -617,8 +617,8 @@ export type AppointmentUncheckedCreateWithoutPaymentInput = {
   doctorId: string
   scheduleId: string
   videoCallingId: string
-  status: $Enums.AppointmentStatus
-  paymentStatus: $Enums.PaymentStatus
+  status?: $Enums.AppointmentStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   prescription?: Prisma.PrescriptionUncheckedCreateNestedOneWithoutAppointmentInput
@@ -669,8 +669,8 @@ export type AppointmentUncheckedUpdateWithoutPaymentInput = {
 export type AppointmentCreateWithoutPrescriptionInput = {
   id?: string
   videoCallingId: string
-  status: $Enums.AppointmentStatus
-  paymentStatus: $Enums.PaymentStatus
+  status?: $Enums.AppointmentStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   patient: Prisma.PatientCreateNestedOneWithoutAppointmentsInput
@@ -685,8 +685,8 @@ export type AppointmentUncheckedCreateWithoutPrescriptionInput = {
   doctorId: string
   scheduleId: string
   videoCallingId: string
-  status: $Enums.AppointmentStatus
-  paymentStatus: $Enums.PaymentStatus
+  status?: $Enums.AppointmentStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   payment?: Prisma.PaymentUncheckedCreateNestedOneWithoutAppointmentInput
@@ -737,8 +737,8 @@ export type AppointmentUncheckedUpdateWithoutPrescriptionInput = {
 export type AppointmentCreateWithoutScheduleInput = {
   id?: string
   videoCallingId: string
-  status: $Enums.AppointmentStatus
-  paymentStatus: $Enums.PaymentStatus
+  status?: $Enums.AppointmentStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   patient: Prisma.PatientCreateNestedOneWithoutAppointmentsInput
@@ -752,8 +752,8 @@ export type AppointmentUncheckedCreateWithoutScheduleInput = {
   patientId: string
   doctorId: string
   videoCallingId: string
-  status: $Enums.AppointmentStatus
-  paymentStatus: $Enums.PaymentStatus
+  status?: $Enums.AppointmentStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   payment?: Prisma.PaymentUncheckedCreateNestedOneWithoutAppointmentInput
@@ -804,8 +804,8 @@ export type AppointmentScalarWhereInput = {
 export type AppointmentCreateWithoutDoctorInput = {
   id?: string
   videoCallingId: string
-  status: $Enums.AppointmentStatus
-  paymentStatus: $Enums.PaymentStatus
+  status?: $Enums.AppointmentStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   patient: Prisma.PatientCreateNestedOneWithoutAppointmentsInput
@@ -819,8 +819,8 @@ export type AppointmentUncheckedCreateWithoutDoctorInput = {
   patientId: string
   scheduleId: string
   videoCallingId: string
-  status: $Enums.AppointmentStatus
-  paymentStatus: $Enums.PaymentStatus
+  status?: $Enums.AppointmentStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   payment?: Prisma.PaymentUncheckedCreateNestedOneWithoutAppointmentInput
@@ -856,8 +856,8 @@ export type AppointmentUpdateManyWithWhereWithoutDoctorInput = {
 export type AppointmentCreateWithoutPatientInput = {
   id?: string
   videoCallingId: string
-  status: $Enums.AppointmentStatus
-  paymentStatus: $Enums.PaymentStatus
+  status?: $Enums.AppointmentStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   doctor: Prisma.DoctorCreateNestedOneWithoutAppointmentsInput
@@ -871,8 +871,8 @@ export type AppointmentUncheckedCreateWithoutPatientInput = {
   doctorId: string
   scheduleId: string
   videoCallingId: string
-  status: $Enums.AppointmentStatus
-  paymentStatus: $Enums.PaymentStatus
+  status?: $Enums.AppointmentStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   payment?: Prisma.PaymentUncheckedCreateNestedOneWithoutAppointmentInput
@@ -910,8 +910,8 @@ export type AppointmentCreateManyScheduleInput = {
   patientId: string
   doctorId: string
   videoCallingId: string
-  status: $Enums.AppointmentStatus
-  paymentStatus: $Enums.PaymentStatus
+  status?: $Enums.AppointmentStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -958,8 +958,8 @@ export type AppointmentCreateManyDoctorInput = {
   patientId: string
   scheduleId: string
   videoCallingId: string
-  status: $Enums.AppointmentStatus
-  paymentStatus: $Enums.PaymentStatus
+  status?: $Enums.AppointmentStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1006,8 +1006,8 @@ export type AppointmentCreateManyPatientInput = {
   doctorId: string
   scheduleId: string
   videoCallingId: string
-  status: $Enums.AppointmentStatus
-  paymentStatus: $Enums.PaymentStatus
+  status?: $Enums.AppointmentStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
 }

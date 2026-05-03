@@ -300,7 +300,7 @@ export type PaymentCreateInput = {
   id?: string
   amount: number
   transactionId: string
-  status: $Enums.PaymentStatus
+  status?: $Enums.PaymentStatus
   paymentGatewayData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -312,7 +312,7 @@ export type PaymentUncheckedCreateInput = {
   appointmentId: string
   amount: number
   transactionId: string
-  status: $Enums.PaymentStatus
+  status?: $Enums.PaymentStatus
   paymentGatewayData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -345,7 +345,7 @@ export type PaymentCreateManyInput = {
   appointmentId: string
   amount: number
   transactionId: string
-  status: $Enums.PaymentStatus
+  status?: $Enums.PaymentStatus
   paymentGatewayData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -460,7 +460,7 @@ export type PaymentCreateWithoutAppointmentInput = {
   id?: string
   amount: number
   transactionId: string
-  status: $Enums.PaymentStatus
+  status?: $Enums.PaymentStatus
   paymentGatewayData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -470,7 +470,7 @@ export type PaymentUncheckedCreateWithoutAppointmentInput = {
   id?: string
   amount: number
   transactionId: string
-  status: $Enums.PaymentStatus
+  status?: $Enums.PaymentStatus
   paymentGatewayData?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string

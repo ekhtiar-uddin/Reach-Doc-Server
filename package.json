@@ -11,8 +11,9 @@
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
     "migrate": "npx prisma migrate dev",
     "reset": "npx prisma migrate reset",
-    "commit": "git add . && git commit -m \" appointment, payment and prescription modules schema has been written  \" && git push",
-    "generate": "npx prisma generate"
+    "commit": "git add . && git commit -m \" added patient modules \" && git push",
+    "generate": "npx prisma generate",
+    "studio": "npx prisma studio"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.7.0",
@@ -28,6 +29,7 @@
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.1.1",
     "openai": "^6.35.0",
+    "uuid": "^14.0.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {
