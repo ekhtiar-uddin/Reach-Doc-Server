@@ -8,7 +8,11 @@ import router from "./app/routes";
 import config from "./config";
 
 const app: Application = express();
-
+app.post(
+  "/webhook",
+  express.raw({ type: "application/json" }),
+  PaymentController.handleStripeWebhookEvent,
+);
 app.use(
   cors({
     origin: "http://localhost:5000",
@@ -20,12 +24,6 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
-
-app.post(
-  "/webhook",
-  express.raw({ type: "application/json" }),
-  PaymentController.handleStripeWebhookEvent,
-);
 
 app.use("/api/v1", router);
 
