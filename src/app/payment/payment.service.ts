@@ -1,24 +1,47 @@
 import Stripe from "stripe";
+import { PaymentStatus } from "../../../prisma/src/generated/prisma/enums";
+import { prisma } from "../shared/prisma";
 
 const handleStripeWebhookEvent = async (event: Stripe.Event) => {
   switch (event.type) {
     case "checkout.session.completed": {
       const session = event.data.object as any;
 
-      const appoitnmentId = session.metadata?.appointmentId;
-      const paymentIntentId = session.payment_intent;
-      const email = session.customer_email;
+      const appointmentId = session.metadata?.appointmentId;
+      const paymentId = session.metadata?.paymentId;
 
-      console.log("Payment Successful");
-      console.log("Appointment ID:", appoitnmentId);
-      console.log("Payment Intent", paymentIntentId);
-      console.log("Customer Email", email);
+      console.log("sdfsd", appointmentId, paymentId);
+
+      await prisma.appointment.update({
+        where: {
+          id: appointmentId,
+        },
+        data: {
+          paymentStatus:
+            session.payment_status === "paid"
+              ? PaymentStatus.PAID
+              : PaymentStatus.UNPAID,
+        },
+      });
+
+      await prisma.payment.update({
+        where: {
+          id: paymentId,
+        },
+        data: {
+          status:
+            session.payment_status === "paid"
+              ? PaymentStatus.PAID
+              : PaymentStatus.UNPAID,
+          paymentGatewayData: session,
+        },
+      });
 
       break;
     }
 
     default:
-      console.log(`Unhandled event type: ${event.type} `);
+      console.log(`ℹ️ Unhandled event type: ${event.type}`);
   }
 };
 
