@@ -13,7 +13,7 @@ model Appointment {
     updatedAt DateTime @updatedAt
     payment  Payment?
     prescription Prescription?
-
+ reviews           Review[]
     @@map("appointments") 
 }
 
