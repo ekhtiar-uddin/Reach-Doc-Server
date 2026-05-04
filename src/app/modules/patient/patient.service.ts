@@ -5,6 +5,7 @@ import {
 } from "../../../../prisma/src/generated/prisma/client";
 import { IOptions, paginationHelper } from "../../helper/paginationHelper";
 import { prisma } from "../../shared/prisma";
+import { IJWTPayload } from "../../types/common";
 import { patientSearchableFields } from "./patient.constants";
 
 import { IPatientFilterRequest } from "./patient.interface";
@@ -101,6 +102,26 @@ const softDelete = async (id: string): Promise<Patient | null> => {
     });
 
     return deletedPatient;
+  });
+};
+
+const updateIntoDB = async (user: IJWTPayload, payload: any) => {
+  const { medicalReport, patientHealthData, ...patientData } = payload;
+
+  const patientInfo = await prisma.patient.findUniqueOrThrow({
+    where: {
+      email: user.email,
+      isDeleted: false,
+    },
+  });
+
+  await prisma.$transaction(async (tnx) => {
+    await tnx.patient.update({
+      where: {
+        id: patientInfo.id,
+      },
+      data: patientData,
+    });
   });
 };
 
