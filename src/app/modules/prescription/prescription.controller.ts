@@ -6,12 +6,16 @@ import { PrescriptionService } from "./prescription.service";
 
 const createPrescription = catchAsync(
   async (req: Request & { user?: IJWTPayload }, res: Response) => {
-    const result = await PrescriptionService.createPrescription(req.body);
+    const user = req.user;
+    const result = await PrescriptionService.createPrescription(
+      user as IJWTPayload,
+      req.body,
+    );
 
     sendResponse(res, {
       statusCode: 201,
       success: true,
-      message: "Prescription created successfully!",
+      message: "prescription created successfully!",
       data: result,
     });
   },

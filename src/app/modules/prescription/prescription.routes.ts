@@ -11,4 +11,4 @@ router.post(
   PrescriptionController.createPrescription,
 );
 
-export const doctorScheduleRoutes = router;
+export const PrescriptionRoutes = router;
