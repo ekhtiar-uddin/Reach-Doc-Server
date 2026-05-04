@@ -115,13 +115,47 @@ const updateIntoDB = async (user: IJWTPayload, payload: any) => {
     },
   });
 
-  await prisma.$transaction(async (tnx) => {
+  return await prisma.$transaction(async (tnx) => {
     await tnx.patient.update({
       where: {
         id: patientInfo.id,
       },
       data: patientData,
     });
+
+    if (patientHealthData) {
+      await tnx.patientHealthData.upsert({
+        where: {
+          patientId: patientInfo.id,
+        },
+        update: patientHealthData,
+        create: {
+          ...patientHealthData,
+          patientId: patientInfo.id,
+        },
+      });
+    }
+
+    if (medicalReport) {
+      await tnx.medicalReport.create({
+        data: {
+          ...medicalReport,
+          patientId: patientInfo.id,
+        },
+      });
+    }
+
+    const result = await tnx.patient.findUnique({
+      where: {
+        id: patientInfo.id,
+      },
+      include: {
+        patientHealthData: true,
+        medicalReports: true,
+      },
+    });
+
+    return result;
   });
 };
 
@@ -129,4 +163,5 @@ export const PatientService = {
   getAllFromDB,
   getByIdFromDB,
   softDelete,
+  updateIntoDB,
 };
