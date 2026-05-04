@@ -11,7 +11,7 @@
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
     "migrate": "npx prisma migrate dev",
     "reset": "npx prisma migrate reset",
-    "commit": "git add . && git commit -m \" changePassword implemented  \" && git push",
+    "commit": "git add . && git commit -m \" added forgotPassword, resetPassowrd and emailSender   \" && git push",
     "generate": "npx prisma generate",
     "studio": "npx prisma studio"
   },
@@ -28,6 +28,7 @@
     "http-status": "^2.1.0",
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.1.1",
+    "nodemailer": "^8.0.7",
     "openai": "^6.35.0",
     "stripe": "^22.1.0",
     "uuid": "^14.0.0",
@@ -40,6 +41,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/multer": "^2.1.0",
     "@types/node": "^24.5.0",
+    "@types/nodemailer": "^8.0.0",
     "prisma": "^7.7.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.2"

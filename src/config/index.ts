@@ -17,6 +17,10 @@ export default {
   },
   salt_round: process.env.SALT_ROUND,
   reset_pass_link: process.env.RESET_PASS_LINK,
+  emailSender: {
+    email: process.env.EMAIL,
+    app_pass: process.env.APP_PASS,
+  },
   cloudinary: {
     api_secret: process.env.CLOUDINARY_API_SECRET as string,
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME as string,
