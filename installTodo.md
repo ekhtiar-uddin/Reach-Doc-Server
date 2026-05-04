@@ -30,6 +30,7 @@
 
 #npm i uuid [for videoCallingId generate in appointment creation ]
 
+# npm install stripe
 
 
 
