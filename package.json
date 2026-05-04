@@ -11,7 +11,7 @@
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
     "migrate": "npx prisma migrate dev",
     "reset": "npx prisma migrate reset",
-    "commit": "git add . && git commit -m \" added forgotPassword, resetPassowrd and emailSender   \" && git push",
+    "commit": "git add . && git commit -m \" Retrieving Information from Cookies with getMe funtion   \" && git push",
     "generate": "npx prisma generate",
     "studio": "npx prisma studio"
   },
