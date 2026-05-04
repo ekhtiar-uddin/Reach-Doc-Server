@@ -17,4 +17,10 @@ router.get(
   AppointmentController.getMyAppointment,
 );
 
+router.patch(
+  "/status/:id",
+  auth(UserRole.ADMIN, UserRole.DOCTOR),
+  AppointmentController.updateAppointmentStatus,
+);
+
 export const AppointmentRoutes = router;

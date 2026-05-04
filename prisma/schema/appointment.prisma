@@ -1,5 +1,5 @@
 model Appointment {
-    id String @id @default(ulid())
+    id String @id @default(uuid())
     patientId String
     patient Patient @relation(fields: [patientId], references: [id])
     doctorId String
@@ -18,7 +18,7 @@ model Appointment {
 }
 
 model Payment {
-    id String @id @default(ulid())
+    id String @id @default(uuid())
     appointmentId String @unique
     appointment Appointment @relation(fields: [appointmentId], references: [id])
     amount Float
@@ -33,7 +33,7 @@ model Payment {
 
 
 model Prescription {
-    id String @id @default(ulid())
+    id String @id @default(uuid())
     appointmentId String @unique
     appointment Appointment @relation(fields: [appointmentId], references: [id])
     doctorId String
