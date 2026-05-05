@@ -179,6 +179,6 @@ const getMyAppointment = async (
   };
 };
 
-export const AppointmentService = {
-  getMyAppointment,
-};
+// export const AppointmentService = {
+//   getMyAppointment,
+// };

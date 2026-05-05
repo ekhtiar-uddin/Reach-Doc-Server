@@ -34,7 +34,7 @@
 
 # npm install nodemailer
 
-
+# npm i node-cron
 
 
  -->
