@@ -8,6 +8,12 @@ import { DoctorScheduleValidation } from "./doctorSchedule.validation";
 
 const router = express.Router();
 
+router.get(
+  "/",
+  auth(UserRole.ADMIN, UserRole.DOCTOR, UserRole.PATIENT),
+  DoctorScheduleController.getAllFromDB,
+);
+
 router.post(
   "/",
   auth(UserRole.DOCTOR),
