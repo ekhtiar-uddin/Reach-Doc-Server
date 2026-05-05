@@ -2,7 +2,7 @@
   "name": "ph-health-care-starter",
   "version": "1.0.0",
   "main": "server.js",
-  "author": "shafayat",
+  "author": "Ekhtiar",
   "license": "MIT",
   "prisma": {
     "schema": "./prisma/schema"
@@ -11,7 +11,7 @@
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
     "migrate": "npx prisma migrate dev",
     "reset": "npx prisma migrate reset",
-    "commit": "git add . && git commit -m \"  Retrieving Profile Data with getMyProfile funtion  \" && git push",
+    "commit": "git add . && git commit -m \"  Retrieving doctor specific schedules individually  \" && git push",
     "generate": "npx prisma generate",
     "studio": "npx prisma studio"
   },
