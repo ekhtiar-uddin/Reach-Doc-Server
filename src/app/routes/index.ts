@@ -5,6 +5,7 @@ import { AdminRoutes } from "../modules/admin/admin.routes";
 import { AppointmentRoutes } from "../modules/appointment/appointment.routes";
 import { DoctorRoutes } from "../modules/doctor/doctor.routes";
 import { doctorScheduleRoutes } from "../modules/doctorSchedule/doctorSchedule.routes";
+import { MetaRoutes } from "../modules/meta/meta.routes";
 import { PatientRoutes } from "../modules/patient/patient.routes";
 import { PrescriptionRoutes } from "../modules/prescription/prescription.routes";
 import { ReviewRoutes } from "../modules/review/review.routes";
@@ -59,6 +60,10 @@ const moduleRoutes = [
   {
     path: "/review",
     route: ReviewRoutes,
+  },
+  {
+    path: "/metadata",
+    route: MetaRoutes,
   },
 ];
 

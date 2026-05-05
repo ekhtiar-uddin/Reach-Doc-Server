@@ -11,7 +11,7 @@
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
     "migrate": "npx prisma migrate dev",
     "reset": "npx prisma migrate reset",
-    "commit": "git add . && git commit -m \" feat: Implement scheduled cleanup for expired unpaid appointments Auto-cancel appointments unpaid for 30+ minutes and release doctor schedules.  \" && git push",
+    "commit": "git add . && git commit -m \" feat(dashboard): add admin dashboard analytics with revenue and charts  \" && git push",
     "generate": "npx prisma generate",
     "studio": "npx prisma studio"
   },
