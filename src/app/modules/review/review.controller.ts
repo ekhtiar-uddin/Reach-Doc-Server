@@ -1,7 +1,11 @@
 import { Request, Response } from "express";
+import httpStatus from "http-status";
+
+import pick from "../../helper/pick";
 import catchAsync from "../../shared/catchAsync";
 import sendResponse from "../../shared/sendResponse";
 import { IJWTPayload } from "../../types/common";
+import { reviewFilterableFields } from "./review.constant";
 import { ReviewService } from "./review.service";
 
 const insertIntoDB = catchAsync(
@@ -22,6 +26,21 @@ const insertIntoDB = catchAsync(
   },
 );
 
+const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
+  const options = pick(req.query, ["page", "limit", "sortBy", "sortOrder"]);
+  const filters = pick(req.query, reviewFilterableFields);
+
+  const result = await ReviewService.getAllFromDB(filters, options);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Reviews retrieval successfully",
+    meta: result.meta,
+    data: result.data,
+  });
+});
+
 export const ReviewController = {
   insertIntoDB,
+  getAllFromDB,
 };
