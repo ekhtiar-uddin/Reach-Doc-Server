@@ -1,4 +1,6 @@
+import httpStatus from "http-status";
 import { Prisma } from "../../../../prisma/src/generated/prisma/client";
+import ApiError from "../../errors/ApiError";
 import { IOptions, paginationHelper } from "../../helper/paginationHelper";
 import { prisma } from "../../shared/prisma";
 import { IJWTPayload } from "../../types/common";
@@ -171,8 +173,43 @@ const getAllFromDB = async (filters: any, options: IOptions) => {
     data: result,
   };
 };
+
+const deleteFromDB = async (user: IJWTPayload, scheduleId: string) => {
+  const doctorData = await prisma.doctor.findUniqueOrThrow({
+    where: {
+      email: user?.email,
+    },
+  });
+
+  const isBookedSchedule = await prisma.doctorSchedules.findFirst({
+    where: {
+      doctorId: doctorData.id,
+      scheduleId: scheduleId,
+      isBooked: true,
+    },
+  });
+
+  if (isBookedSchedule) {
+    throw new ApiError(
+      httpStatus.BAD_REQUEST,
+      "You can not delete the schedule because of the schedule is already booked!",
+    );
+  }
+
+  const result = await prisma.doctorSchedules.delete({
+    where: {
+      doctorId_scheduleId: {
+        doctorId: doctorData.id,
+        scheduleId: scheduleId,
+      },
+    },
+  });
+  return result;
+};
+
 export const DoctorScheduleService = {
   insertIntoDB,
   getMySchedule,
   getAllFromDB,
+  deleteFromDB,
 };
