@@ -5,6 +5,8 @@ import { AppointmentController } from "./appointment.controller";
 
 const router = express.Router();
 
+router.get("/", auth(UserRole.ADMIN), AppointmentController.getAllFromDB);
+
 router.post(
   "/",
   auth(UserRole.PATIENT),
