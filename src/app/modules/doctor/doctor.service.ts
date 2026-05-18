@@ -91,7 +91,7 @@ const getAllFromDB = async (
           schedule: true,
         },
       },
-      review: {
+      reviews: {
         select: {
           rating: true,
         },
@@ -132,7 +132,7 @@ const getByIdFromDB = async (id: string): Promise<Doctor | null> => {
           schedule: true,
         },
       },
-      review: true,
+      reviews: true,
     },
   });
   return result;
@@ -328,7 +328,7 @@ const getAISuggestion = async (input: PatientInput) => {
       doctorSpecialties: {
         include: { specialities: true },
       },
-      review: { select: { rating: true } },
+      reviews: { select: { rating: true } },
     },
   });
 
@@ -357,9 +357,9 @@ const getAISuggestion = async (input: PatientInput) => {
       currentWorkingPlace: doctor.currentWorkingPlace,
       designation: doctor.designation,
       averageRating:
-        doctor.review && doctor.review.length > 0
-          ? doctor.review.reduce((sum: number, r: any) => sum + r.rating, 0) /
-            doctor.review.length
+        doctor.reviews && doctor.reviews.length > 0
+          ? doctor.reviews.reduce((sum: number, r: any) => sum + r.rating, 0) /
+            doctor.reviews.length
           : 0,
       specialties: allSpecialties, // Array of all specialties
       primarySpecialty: allSpecialties[0] || "General", // For backward compatibility
@@ -552,7 +552,7 @@ const getAllPublic = async (
           specialities: true,
         },
       },
-      review: {
+      reviews: {
         select: {
           rating: true,
           comment: true,
