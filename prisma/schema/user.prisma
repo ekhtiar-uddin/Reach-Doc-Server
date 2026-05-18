@@ -27,7 +27,7 @@ model Admin {
   isDeleted Boolean @default(false)
     createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  // fields : [email] means this table email field - 
+  
   user User @relation(fields: [email] , references: [email])
 
   @@map("admins")
