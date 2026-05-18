@@ -11,13 +11,14 @@
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
     "migrate": "npx prisma migrate dev",
     "reset": "npx prisma migrate reset",
-    "commit": "git add . && git commit -m \" refactor: improve user modules structure \" && git push",
+    "commit": "git add . && git commit -m \" refactor: fixed issues in doctor module \" && git push",
     "generate": "npx prisma generate",
     "studio": "npx prisma studio"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.7.0",
     "@prisma/client": "^7.7.0",
+    "axios": "^1.16.1",
     "bcryptjs": "^3.0.3",
     "cloudinary": "^2.9.0",
     "cookie-parser": "^1.4.7",
