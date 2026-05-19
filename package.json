@@ -11,7 +11,7 @@
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
     "migrate": "npx prisma migrate dev",
     "reset": "npx prisma migrate reset",
-    "commit": "git add . && git commit -m \" refactor: update user validation schemas \" && git push",
+    "commit": "git add . && git commit -m \" refactor: update in auth service \" && git push",
     "generate": "npx prisma generate",
     "studio": "npx prisma studio"
   },

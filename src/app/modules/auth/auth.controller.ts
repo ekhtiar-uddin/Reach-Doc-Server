@@ -5,8 +5,8 @@ import sendResponse from "../../shared/sendResponse";
 
 import { AuthService } from "./auth.service";
 
-const login = catchAsync(async (req: Request, res: Response) => {
-  const result = await AuthService.login(req.body);
+const loginUser = catchAsync(async (req: Request, res: Response) => {
+  const result = await AuthService.loginUser(req.body);
   const { accessToken, refreshToken, needPasswordChange } = result;
 
   res.cookie("accessToken", accessToken, {
@@ -105,7 +105,7 @@ const getMe = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const AuthController = {
-  login,
+  loginUser,
   refreshToken,
   changePassword,
   resetPassword,
