@@ -246,7 +246,7 @@ export type MedicalReportCreateInput = {
   reportLink: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  patient: Prisma.PatientCreateNestedOneWithoutMedicalReportsInput
+  patient: Prisma.PatientCreateNestedOneWithoutMedicalReportInput
 }
 
 export type MedicalReportUncheckedCreateInput = {
@@ -264,7 +264,7 @@ export type MedicalReportUpdateInput = {
   reportLink?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  patient?: Prisma.PatientUpdateOneRequiredWithoutMedicalReportsNestedInput
+  patient?: Prisma.PatientUpdateOneRequiredWithoutMedicalReportNestedInput
 }
 
 export type MedicalReportUncheckedUpdateInput = {

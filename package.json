@@ -11,7 +11,7 @@
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
     "migrate": "npx prisma migrate dev",
     "reset": "npx prisma migrate reset",
-    "commit": "git add . && git commit -m \" refactor: updated auth controller \" && git push",
+    "commit": "git add . && git commit -m \" fix: update cookie settings to enable cross-origin cookie in development \" && git push",
     "generate": "npx prisma generate",
     "studio": "npx prisma studio"
   },
@@ -26,6 +26,7 @@
     "date-fns": "^4.1.0",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
+    "express-rate-limit": "^8.5.2",
     "http-status": "^2.1.0",
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.1.1",

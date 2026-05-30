@@ -259,8 +259,8 @@ export const DoctorScalarFieldEnum = {
   qualification: 'qualification',
   currentWorkingPlace: 'currentWorkingPlace',
   designation: 'designation',
-  averageRating: 'averageRating',
   isDeleted: 'isDeleted',
+  averageRating: 'averageRating',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -270,9 +270,10 @@ export type DoctorScalarFieldEnum = (typeof DoctorScalarFieldEnum)[keyof typeof 
 
 export const PatientScalarFieldEnum = {
   id: 'id',
-  name: 'name',
   email: 'email',
+  name: 'name',
   profilePhoto: 'profilePhoto',
+  contactNumber: 'contactNumber',
   address: 'address',
   isDeleted: 'isDeleted',
   createdAt: 'createdAt',

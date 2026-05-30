@@ -380,11 +380,11 @@ const getMe = async (user: any) => {
   return userData;
 };
 
-export const AuthService = {
+export const AuthServices = {
   loginUser,
   refreshToken,
   changePassword,
-  resetPassword,
   forgotPassword,
+  resetPassword,
   getMe,
 };

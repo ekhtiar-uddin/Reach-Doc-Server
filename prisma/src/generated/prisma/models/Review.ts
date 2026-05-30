@@ -312,8 +312,8 @@ export type ReviewCreateInput = {
   comment?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  patient: Prisma.PatientCreateNestedOneWithoutReviewsInput
-  doctor: Prisma.DoctorCreateNestedOneWithoutReviewsInput
+  patient: Prisma.PatientCreateNestedOneWithoutReviewInput
+  doctor: Prisma.DoctorCreateNestedOneWithoutReviewInput
   appointment: Prisma.AppointmentCreateNestedOneWithoutReviewsInput
 }
 
@@ -334,8 +334,8 @@ export type ReviewUpdateInput = {
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  patient?: Prisma.PatientUpdateOneRequiredWithoutReviewsNestedInput
-  doctor?: Prisma.DoctorUpdateOneRequiredWithoutReviewsNestedInput
+  patient?: Prisma.PatientUpdateOneRequiredWithoutReviewNestedInput
+  doctor?: Prisma.DoctorUpdateOneRequiredWithoutReviewNestedInput
   appointment?: Prisma.AppointmentUpdateOneRequiredWithoutReviewsNestedInput
 }
 
@@ -575,8 +575,8 @@ export type ReviewCreateWithoutAppointmentInput = {
   comment?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  patient: Prisma.PatientCreateNestedOneWithoutReviewsInput
-  doctor: Prisma.DoctorCreateNestedOneWithoutReviewsInput
+  patient: Prisma.PatientCreateNestedOneWithoutReviewInput
+  doctor: Prisma.DoctorCreateNestedOneWithoutReviewInput
 }
 
 export type ReviewUncheckedCreateWithoutAppointmentInput = {
@@ -635,7 +635,7 @@ export type ReviewCreateWithoutDoctorInput = {
   comment?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  patient: Prisma.PatientCreateNestedOneWithoutReviewsInput
+  patient: Prisma.PatientCreateNestedOneWithoutReviewInput
   appointment: Prisma.AppointmentCreateNestedOneWithoutReviewsInput
 }
 
@@ -681,7 +681,7 @@ export type ReviewCreateWithoutPatientInput = {
   comment?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  doctor: Prisma.DoctorCreateNestedOneWithoutReviewsInput
+  doctor: Prisma.DoctorCreateNestedOneWithoutReviewInput
   appointment: Prisma.AppointmentCreateNestedOneWithoutReviewsInput
 }
 
@@ -737,8 +737,8 @@ export type ReviewUpdateWithoutAppointmentInput = {
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  patient?: Prisma.PatientUpdateOneRequiredWithoutReviewsNestedInput
-  doctor?: Prisma.DoctorUpdateOneRequiredWithoutReviewsNestedInput
+  patient?: Prisma.PatientUpdateOneRequiredWithoutReviewNestedInput
+  doctor?: Prisma.DoctorUpdateOneRequiredWithoutReviewNestedInput
 }
 
 export type ReviewUncheckedUpdateWithoutAppointmentInput = {
@@ -777,7 +777,7 @@ export type ReviewUpdateWithoutDoctorInput = {
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  patient?: Prisma.PatientUpdateOneRequiredWithoutReviewsNestedInput
+  patient?: Prisma.PatientUpdateOneRequiredWithoutReviewNestedInput
   appointment?: Prisma.AppointmentUpdateOneRequiredWithoutReviewsNestedInput
 }
 
@@ -817,7 +817,7 @@ export type ReviewUpdateWithoutPatientInput = {
   comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  doctor?: Prisma.DoctorUpdateOneRequiredWithoutReviewsNestedInput
+  doctor?: Prisma.DoctorUpdateOneRequiredWithoutReviewNestedInput
   appointment?: Prisma.AppointmentUpdateOneRequiredWithoutReviewsNestedInput
 }
 

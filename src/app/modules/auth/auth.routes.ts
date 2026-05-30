@@ -1,24 +1,21 @@
 import express, { NextFunction, Request, Response } from "express";
 import { UserRole } from "../../../../prisma/src/generated/prisma/enums";
 import auth from "../../middlewares/auth";
+import { authLimiter } from "../../middlewares/rateLimiter";
 import { AuthController } from "./auth.controller";
 const router = express.Router();
 
-router.get("/me", AuthController.getMe);
-
-router.post("/login", AuthController.loginUser);
+router.post("/login", authLimiter, AuthController.loginUser);
 
 router.post("/refresh-token", AuthController.refreshToken);
 
 router.post(
   "/change-password",
-  auth(UserRole.ADMIN, UserRole.DOCTOR, UserRole.PATIENT),
+  auth(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.DOCTOR, UserRole.PATIENT),
   AuthController.changePassword,
 );
 
 router.post("/forgot-password", AuthController.forgotPassword);
-
-// router.post("/reset-password", AuthController.resetPassword);
 
 router.post(
   "/reset-password",
@@ -40,5 +37,7 @@ router.post(
   },
   AuthController.resetPassword,
 );
+
+router.get("/me", AuthController.getMe);
 
 export const authRoutes = router;

@@ -637,14 +637,9 @@ export type PatientHealthDataMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type PatientHealthDataListRelationFilter = {
-  every?: Prisma.PatientHealthDataWhereInput
-  some?: Prisma.PatientHealthDataWhereInput
-  none?: Prisma.PatientHealthDataWhereInput
-}
-
-export type PatientHealthDataOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
+export type PatientHealthDataNullableScalarRelationFilter = {
+  is?: Prisma.PatientHealthDataWhereInput | null
+  isNot?: Prisma.PatientHealthDataWhereInput | null
 }
 
 export type EnumGenderFieldUpdateOperationsInput = {
@@ -663,46 +658,36 @@ export type EnumMaritalStatusFieldUpdateOperationsInput = {
   set?: $Enums.MaritalStatus
 }
 
-export type PatientHealthDataCreateNestedManyWithoutPatientInput = {
-  create?: Prisma.XOR<Prisma.PatientHealthDataCreateWithoutPatientInput, Prisma.PatientHealthDataUncheckedCreateWithoutPatientInput> | Prisma.PatientHealthDataCreateWithoutPatientInput[] | Prisma.PatientHealthDataUncheckedCreateWithoutPatientInput[]
-  connectOrCreate?: Prisma.PatientHealthDataCreateOrConnectWithoutPatientInput | Prisma.PatientHealthDataCreateOrConnectWithoutPatientInput[]
-  createMany?: Prisma.PatientHealthDataCreateManyPatientInputEnvelope
-  connect?: Prisma.PatientHealthDataWhereUniqueInput | Prisma.PatientHealthDataWhereUniqueInput[]
+export type PatientHealthDataCreateNestedOneWithoutPatientInput = {
+  create?: Prisma.XOR<Prisma.PatientHealthDataCreateWithoutPatientInput, Prisma.PatientHealthDataUncheckedCreateWithoutPatientInput>
+  connectOrCreate?: Prisma.PatientHealthDataCreateOrConnectWithoutPatientInput
+  connect?: Prisma.PatientHealthDataWhereUniqueInput
 }
 
-export type PatientHealthDataUncheckedCreateNestedManyWithoutPatientInput = {
-  create?: Prisma.XOR<Prisma.PatientHealthDataCreateWithoutPatientInput, Prisma.PatientHealthDataUncheckedCreateWithoutPatientInput> | Prisma.PatientHealthDataCreateWithoutPatientInput[] | Prisma.PatientHealthDataUncheckedCreateWithoutPatientInput[]
-  connectOrCreate?: Prisma.PatientHealthDataCreateOrConnectWithoutPatientInput | Prisma.PatientHealthDataCreateOrConnectWithoutPatientInput[]
-  createMany?: Prisma.PatientHealthDataCreateManyPatientInputEnvelope
-  connect?: Prisma.PatientHealthDataWhereUniqueInput | Prisma.PatientHealthDataWhereUniqueInput[]
+export type PatientHealthDataUncheckedCreateNestedOneWithoutPatientInput = {
+  create?: Prisma.XOR<Prisma.PatientHealthDataCreateWithoutPatientInput, Prisma.PatientHealthDataUncheckedCreateWithoutPatientInput>
+  connectOrCreate?: Prisma.PatientHealthDataCreateOrConnectWithoutPatientInput
+  connect?: Prisma.PatientHealthDataWhereUniqueInput
 }
 
-export type PatientHealthDataUpdateManyWithoutPatientNestedInput = {
-  create?: Prisma.XOR<Prisma.PatientHealthDataCreateWithoutPatientInput, Prisma.PatientHealthDataUncheckedCreateWithoutPatientInput> | Prisma.PatientHealthDataCreateWithoutPatientInput[] | Prisma.PatientHealthDataUncheckedCreateWithoutPatientInput[]
-  connectOrCreate?: Prisma.PatientHealthDataCreateOrConnectWithoutPatientInput | Prisma.PatientHealthDataCreateOrConnectWithoutPatientInput[]
-  upsert?: Prisma.PatientHealthDataUpsertWithWhereUniqueWithoutPatientInput | Prisma.PatientHealthDataUpsertWithWhereUniqueWithoutPatientInput[]
-  createMany?: Prisma.PatientHealthDataCreateManyPatientInputEnvelope
-  set?: Prisma.PatientHealthDataWhereUniqueInput | Prisma.PatientHealthDataWhereUniqueInput[]
-  disconnect?: Prisma.PatientHealthDataWhereUniqueInput | Prisma.PatientHealthDataWhereUniqueInput[]
-  delete?: Prisma.PatientHealthDataWhereUniqueInput | Prisma.PatientHealthDataWhereUniqueInput[]
-  connect?: Prisma.PatientHealthDataWhereUniqueInput | Prisma.PatientHealthDataWhereUniqueInput[]
-  update?: Prisma.PatientHealthDataUpdateWithWhereUniqueWithoutPatientInput | Prisma.PatientHealthDataUpdateWithWhereUniqueWithoutPatientInput[]
-  updateMany?: Prisma.PatientHealthDataUpdateManyWithWhereWithoutPatientInput | Prisma.PatientHealthDataUpdateManyWithWhereWithoutPatientInput[]
-  deleteMany?: Prisma.PatientHealthDataScalarWhereInput | Prisma.PatientHealthDataScalarWhereInput[]
+export type PatientHealthDataUpdateOneWithoutPatientNestedInput = {
+  create?: Prisma.XOR<Prisma.PatientHealthDataCreateWithoutPatientInput, Prisma.PatientHealthDataUncheckedCreateWithoutPatientInput>
+  connectOrCreate?: Prisma.PatientHealthDataCreateOrConnectWithoutPatientInput
+  upsert?: Prisma.PatientHealthDataUpsertWithoutPatientInput
+  disconnect?: Prisma.PatientHealthDataWhereInput | boolean
+  delete?: Prisma.PatientHealthDataWhereInput | boolean
+  connect?: Prisma.PatientHealthDataWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PatientHealthDataUpdateToOneWithWhereWithoutPatientInput, Prisma.PatientHealthDataUpdateWithoutPatientInput>, Prisma.PatientHealthDataUncheckedUpdateWithoutPatientInput>
 }
 
-export type PatientHealthDataUncheckedUpdateManyWithoutPatientNestedInput = {
-  create?: Prisma.XOR<Prisma.PatientHealthDataCreateWithoutPatientInput, Prisma.PatientHealthDataUncheckedCreateWithoutPatientInput> | Prisma.PatientHealthDataCreateWithoutPatientInput[] | Prisma.PatientHealthDataUncheckedCreateWithoutPatientInput[]
-  connectOrCreate?: Prisma.PatientHealthDataCreateOrConnectWithoutPatientInput | Prisma.PatientHealthDataCreateOrConnectWithoutPatientInput[]
-  upsert?: Prisma.PatientHealthDataUpsertWithWhereUniqueWithoutPatientInput | Prisma.PatientHealthDataUpsertWithWhereUniqueWithoutPatientInput[]
-  createMany?: Prisma.PatientHealthDataCreateManyPatientInputEnvelope
-  set?: Prisma.PatientHealthDataWhereUniqueInput | Prisma.PatientHealthDataWhereUniqueInput[]
-  disconnect?: Prisma.PatientHealthDataWhereUniqueInput | Prisma.PatientHealthDataWhereUniqueInput[]
-  delete?: Prisma.PatientHealthDataWhereUniqueInput | Prisma.PatientHealthDataWhereUniqueInput[]
-  connect?: Prisma.PatientHealthDataWhereUniqueInput | Prisma.PatientHealthDataWhereUniqueInput[]
-  update?: Prisma.PatientHealthDataUpdateWithWhereUniqueWithoutPatientInput | Prisma.PatientHealthDataUpdateWithWhereUniqueWithoutPatientInput[]
-  updateMany?: Prisma.PatientHealthDataUpdateManyWithWhereWithoutPatientInput | Prisma.PatientHealthDataUpdateManyWithWhereWithoutPatientInput[]
-  deleteMany?: Prisma.PatientHealthDataScalarWhereInput | Prisma.PatientHealthDataScalarWhereInput[]
+export type PatientHealthDataUncheckedUpdateOneWithoutPatientNestedInput = {
+  create?: Prisma.XOR<Prisma.PatientHealthDataCreateWithoutPatientInput, Prisma.PatientHealthDataUncheckedCreateWithoutPatientInput>
+  connectOrCreate?: Prisma.PatientHealthDataCreateOrConnectWithoutPatientInput
+  upsert?: Prisma.PatientHealthDataUpsertWithoutPatientInput
+  disconnect?: Prisma.PatientHealthDataWhereInput | boolean
+  delete?: Prisma.PatientHealthDataWhereInput | boolean
+  connect?: Prisma.PatientHealthDataWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PatientHealthDataUpdateToOneWithWhereWithoutPatientInput, Prisma.PatientHealthDataUpdateWithoutPatientInput>, Prisma.PatientHealthDataUncheckedUpdateWithoutPatientInput>
 }
 
 export type PatientHealthDataCreateWithoutPatientInput = {
@@ -754,73 +739,15 @@ export type PatientHealthDataCreateOrConnectWithoutPatientInput = {
   create: Prisma.XOR<Prisma.PatientHealthDataCreateWithoutPatientInput, Prisma.PatientHealthDataUncheckedCreateWithoutPatientInput>
 }
 
-export type PatientHealthDataCreateManyPatientInputEnvelope = {
-  data: Prisma.PatientHealthDataCreateManyPatientInput | Prisma.PatientHealthDataCreateManyPatientInput[]
-  skipDuplicates?: boolean
-}
-
-export type PatientHealthDataUpsertWithWhereUniqueWithoutPatientInput = {
-  where: Prisma.PatientHealthDataWhereUniqueInput
+export type PatientHealthDataUpsertWithoutPatientInput = {
   update: Prisma.XOR<Prisma.PatientHealthDataUpdateWithoutPatientInput, Prisma.PatientHealthDataUncheckedUpdateWithoutPatientInput>
   create: Prisma.XOR<Prisma.PatientHealthDataCreateWithoutPatientInput, Prisma.PatientHealthDataUncheckedCreateWithoutPatientInput>
+  where?: Prisma.PatientHealthDataWhereInput
 }
 
-export type PatientHealthDataUpdateWithWhereUniqueWithoutPatientInput = {
-  where: Prisma.PatientHealthDataWhereUniqueInput
+export type PatientHealthDataUpdateToOneWithWhereWithoutPatientInput = {
+  where?: Prisma.PatientHealthDataWhereInput
   data: Prisma.XOR<Prisma.PatientHealthDataUpdateWithoutPatientInput, Prisma.PatientHealthDataUncheckedUpdateWithoutPatientInput>
-}
-
-export type PatientHealthDataUpdateManyWithWhereWithoutPatientInput = {
-  where: Prisma.PatientHealthDataScalarWhereInput
-  data: Prisma.XOR<Prisma.PatientHealthDataUpdateManyMutationInput, Prisma.PatientHealthDataUncheckedUpdateManyWithoutPatientInput>
-}
-
-export type PatientHealthDataScalarWhereInput = {
-  AND?: Prisma.PatientHealthDataScalarWhereInput | Prisma.PatientHealthDataScalarWhereInput[]
-  OR?: Prisma.PatientHealthDataScalarWhereInput[]
-  NOT?: Prisma.PatientHealthDataScalarWhereInput | Prisma.PatientHealthDataScalarWhereInput[]
-  id?: Prisma.StringFilter<"PatientHealthData"> | string
-  patientId?: Prisma.StringFilter<"PatientHealthData"> | string
-  gender?: Prisma.EnumGenderFilter<"PatientHealthData"> | $Enums.Gender
-  dateOfBirth?: Prisma.StringFilter<"PatientHealthData"> | string
-  bloodGroup?: Prisma.EnumBloodGroupFilter<"PatientHealthData"> | $Enums.BloodGroup
-  hasAllergies?: Prisma.BoolNullableFilter<"PatientHealthData"> | boolean | null
-  hasDiabetes?: Prisma.BoolNullableFilter<"PatientHealthData"> | boolean | null
-  height?: Prisma.StringFilter<"PatientHealthData"> | string
-  weight?: Prisma.StringFilter<"PatientHealthData"> | string
-  smokingStatus?: Prisma.BoolNullableFilter<"PatientHealthData"> | boolean | null
-  dietaryPreferences?: Prisma.StringNullableFilter<"PatientHealthData"> | string | null
-  pregnancyStatus?: Prisma.BoolNullableFilter<"PatientHealthData"> | boolean | null
-  mentalHealthHistory?: Prisma.StringNullableFilter<"PatientHealthData"> | string | null
-  immunizationStatus?: Prisma.StringNullableFilter<"PatientHealthData"> | string | null
-  hasPastSurgeries?: Prisma.BoolNullableFilter<"PatientHealthData"> | boolean | null
-  recentAnxiety?: Prisma.BoolNullableFilter<"PatientHealthData"> | boolean | null
-  recentDepression?: Prisma.BoolNullableFilter<"PatientHealthData"> | boolean | null
-  maritalStatus?: Prisma.EnumMaritalStatusFilter<"PatientHealthData"> | $Enums.MaritalStatus
-  createdAt?: Prisma.DateTimeFilter<"PatientHealthData"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"PatientHealthData"> | Date | string
-}
-
-export type PatientHealthDataCreateManyPatientInput = {
-  id?: string
-  gender: $Enums.Gender
-  dateOfBirth: string
-  bloodGroup: $Enums.BloodGroup
-  hasAllergies?: boolean | null
-  hasDiabetes?: boolean | null
-  height: string
-  weight: string
-  smokingStatus?: boolean | null
-  dietaryPreferences?: string | null
-  pregnancyStatus?: boolean | null
-  mentalHealthHistory?: string | null
-  immunizationStatus?: string | null
-  hasPastSurgeries?: boolean | null
-  recentAnxiety?: boolean | null
-  recentDepression?: boolean | null
-  maritalStatus?: $Enums.MaritalStatus
-  createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type PatientHealthDataUpdateWithoutPatientInput = {
@@ -846,28 +773,6 @@ export type PatientHealthDataUpdateWithoutPatientInput = {
 }
 
 export type PatientHealthDataUncheckedUpdateWithoutPatientInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  dateOfBirth?: Prisma.StringFieldUpdateOperationsInput | string
-  bloodGroup?: Prisma.EnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup
-  hasAllergies?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  hasDiabetes?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  height?: Prisma.StringFieldUpdateOperationsInput | string
-  weight?: Prisma.StringFieldUpdateOperationsInput | string
-  smokingStatus?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  dietaryPreferences?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  pregnancyStatus?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  mentalHealthHistory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  immunizationStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  hasPastSurgeries?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  recentAnxiety?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  recentDepression?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  maritalStatus?: Prisma.EnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type PatientHealthDataUncheckedUpdateManyWithoutPatientInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.StringFieldUpdateOperationsInput | string

@@ -277,8 +277,8 @@ export type PrescriptionCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   appointment: Prisma.AppointmentCreateNestedOneWithoutPrescriptionInput
-  doctor: Prisma.DoctorCreateNestedOneWithoutPrescriptionsInput
-  patient: Prisma.PatientCreateNestedOneWithoutPrescriptionsInput
+  doctor: Prisma.DoctorCreateNestedOneWithoutPrescriptionInput
+  patient: Prisma.PatientCreateNestedOneWithoutPrescriptionInput
 }
 
 export type PrescriptionUncheckedCreateInput = {
@@ -299,8 +299,8 @@ export type PrescriptionUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appointment?: Prisma.AppointmentUpdateOneRequiredWithoutPrescriptionNestedInput
-  doctor?: Prisma.DoctorUpdateOneRequiredWithoutPrescriptionsNestedInput
-  patient?: Prisma.PatientUpdateOneRequiredWithoutPrescriptionsNestedInput
+  doctor?: Prisma.DoctorUpdateOneRequiredWithoutPrescriptionNestedInput
+  patient?: Prisma.PatientUpdateOneRequiredWithoutPrescriptionNestedInput
 }
 
 export type PrescriptionUncheckedUpdateInput = {
@@ -518,8 +518,8 @@ export type PrescriptionCreateWithoutAppointmentInput = {
   followUpDate?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  doctor: Prisma.DoctorCreateNestedOneWithoutPrescriptionsInput
-  patient: Prisma.PatientCreateNestedOneWithoutPrescriptionsInput
+  doctor: Prisma.DoctorCreateNestedOneWithoutPrescriptionInput
+  patient: Prisma.PatientCreateNestedOneWithoutPrescriptionInput
 }
 
 export type PrescriptionUncheckedCreateWithoutAppointmentInput = {
@@ -554,8 +554,8 @@ export type PrescriptionUpdateWithoutAppointmentInput = {
   followUpDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  doctor?: Prisma.DoctorUpdateOneRequiredWithoutPrescriptionsNestedInput
-  patient?: Prisma.PatientUpdateOneRequiredWithoutPrescriptionsNestedInput
+  doctor?: Prisma.DoctorUpdateOneRequiredWithoutPrescriptionNestedInput
+  patient?: Prisma.PatientUpdateOneRequiredWithoutPrescriptionNestedInput
 }
 
 export type PrescriptionUncheckedUpdateWithoutAppointmentInput = {
@@ -575,7 +575,7 @@ export type PrescriptionCreateWithoutDoctorInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   appointment: Prisma.AppointmentCreateNestedOneWithoutPrescriptionInput
-  patient: Prisma.PatientCreateNestedOneWithoutPrescriptionsInput
+  patient: Prisma.PatientCreateNestedOneWithoutPrescriptionInput
 }
 
 export type PrescriptionUncheckedCreateWithoutDoctorInput = {
@@ -635,7 +635,7 @@ export type PrescriptionCreateWithoutPatientInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   appointment: Prisma.AppointmentCreateNestedOneWithoutPrescriptionInput
-  doctor: Prisma.DoctorCreateNestedOneWithoutPrescriptionsInput
+  doctor: Prisma.DoctorCreateNestedOneWithoutPrescriptionInput
 }
 
 export type PrescriptionUncheckedCreateWithoutPatientInput = {
@@ -691,7 +691,7 @@ export type PrescriptionUpdateWithoutDoctorInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appointment?: Prisma.AppointmentUpdateOneRequiredWithoutPrescriptionNestedInput
-  patient?: Prisma.PatientUpdateOneRequiredWithoutPrescriptionsNestedInput
+  patient?: Prisma.PatientUpdateOneRequiredWithoutPrescriptionNestedInput
 }
 
 export type PrescriptionUncheckedUpdateWithoutDoctorInput = {
@@ -731,7 +731,7 @@ export type PrescriptionUpdateWithoutPatientInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appointment?: Prisma.AppointmentUpdateOneRequiredWithoutPrescriptionNestedInput
-  doctor?: Prisma.DoctorUpdateOneRequiredWithoutPrescriptionsNestedInput
+  doctor?: Prisma.DoctorUpdateOneRequiredWithoutPrescriptionNestedInput
 }
 
 export type PrescriptionUncheckedUpdateWithoutPatientInput = {

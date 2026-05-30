@@ -4,8 +4,7 @@ import catchAsync from "../../shared/catchAsync";
 import sendResponse from "../../shared/sendResponse";
 
 import config from "../../../config";
-import { AuthService } from "./auth.service";
-
+import { AuthServices } from "./auth.service";
 const loginUser = catchAsync(async (req: Request, res: Response) => {
   const accessTokenExpiresIn = config.jwt.expires_in as string;
   const refreshTokenExpiresIn = config.jwt.refresh_token_expires_in as string;
@@ -53,7 +52,7 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
   } else {
     refreshTokenMaxAge = 1000 * 60 * 60 * 24 * 30; // default 30 days
   }
-  const result = await AuthService.loginUser(req.body);
+  const result = await AuthServices.loginUser(req.body);
   const { refreshToken, accessToken } = result;
   res.cookie("accessToken", accessToken, {
     secure: true,
@@ -132,7 +131,7 @@ REFRESH_TOKEN_EXPIRES_IN=1y
     refreshTokenMaxAge = 1000 * 60 * 60 * 24 * 30; // default 30 days
   }
 
-  const result = await AuthService.refreshToken(refreshToken);
+  const result = await AuthServices.refreshToken(refreshToken);
   res.cookie("accessToken", result.accessToken, {
     secure: true,
     httpOnly: true,
@@ -161,7 +160,7 @@ const changePassword = catchAsync(
   async (req: Request & { user?: any }, res: Response) => {
     const user = req.user;
 
-    const result = await AuthService.changePassword(user, req.body);
+    const result = await AuthServices.changePassword(user, req.body);
 
     sendResponse(res, {
       statusCode: httpStatus.OK,
@@ -173,7 +172,7 @@ const changePassword = catchAsync(
 );
 
 const forgotPassword = catchAsync(async (req: Request, res: Response) => {
-  await AuthService.forgotPassword(req.body);
+  await AuthServices.forgotPassword(req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -191,7 +190,7 @@ const resetPassword = catchAsync(
     const token = authHeader ? authHeader.replace("Bearer ", "") : null;
     const user = req.user; // Will be populated if authenticated via middleware
 
-    await AuthService.resetPassword(token, req.body, user);
+    await AuthServices.resetPassword(token, req.body, user);
 
     sendResponse(res, {
       statusCode: httpStatus.OK,
@@ -206,7 +205,7 @@ const getMe = catchAsync(
   async (req: Request & { user?: any }, res: Response) => {
     const user = req.cookies;
 
-    const result = await AuthService.getMe(user);
+    const result = await AuthServices.getMe(user);
 
     sendResponse(res, {
       statusCode: httpStatus.OK,
