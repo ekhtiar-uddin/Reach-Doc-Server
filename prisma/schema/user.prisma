@@ -52,7 +52,7 @@ model Doctor {
   doctorSchedules     DoctorSchedules[]
   appointment         Appointment[]
   prescription        Prescription[]
-  review              Review[]
+  reviews              Review[]
 
   @@map("doctors")
 }
