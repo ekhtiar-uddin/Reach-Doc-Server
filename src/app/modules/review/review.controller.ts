@@ -2,34 +2,31 @@ import { Request, Response } from "express";
 import httpStatus from "http-status";
 
 import pick from "../../helper/pick";
+import { IAuthUser } from "../../interfaces/common";
 import catchAsync from "../../shared/catchAsync";
 import sendResponse from "../../shared/sendResponse";
-import { IJWTPayload } from "../../types/common";
 import { reviewFilterableFields } from "./review.constant";
 import { ReviewService } from "./review.service";
 
 const insertIntoDB = catchAsync(
-  async (req: Request & { user?: IJWTPayload }, res: Response) => {
+  async (req: Request & { user?: IAuthUser }, res: Response) => {
     const user = req.user;
-
     const result = await ReviewService.insertIntoDB(
-      user as IJWTPayload,
+      user as IAuthUser,
       req.body,
     );
-
     sendResponse(res, {
-      statusCode: 201,
+      statusCode: httpStatus.OK,
       success: true,
-      message: "Review created successfully!",
+      message: "Review created successfully",
       data: result,
     });
   },
 );
 
 const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
-  const options = pick(req.query, ["page", "limit", "sortBy", "sortOrder"]);
   const filters = pick(req.query, reviewFilterableFields);
-
+  const options = pick(req.query, ["limit", "page", "sortBy", "sortOrder"]);
   const result = await ReviewService.getAllFromDB(filters, options);
   sendResponse(res, {
     statusCode: httpStatus.OK,

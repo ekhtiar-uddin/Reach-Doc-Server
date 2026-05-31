@@ -1,13 +1,18 @@
 import httpStatus from "http-status";
-import { Prisma } from "../../../../prisma/src/generated/prisma/client";
+import {
+  PaymentStatus,
+  Prisma,
+} from "../../../../prisma/src/generated/prisma/client";
 import ApiError from "../../errors/ApiError";
-import { IOptions, paginationHelper } from "../../helper/paginationHelper";
+import { paginationHelper } from "../../helper/paginationHelper";
+import { IAuthUser } from "../../interfaces/common";
+import { IPaginationOptions } from "../../interfaces/pagination";
 import { prisma } from "../../shared/prisma";
-import { IJWTPayload } from "../../types/common";
-const insertIntoDB = async (user: IJWTPayload, payload: any) => {
+
+const insertIntoDB = async (user: IAuthUser, payload: any) => {
   const patientData = await prisma.patient.findUniqueOrThrow({
     where: {
-      email: user.email,
+      email: user?.email,
     },
   });
 
@@ -17,43 +22,48 @@ const insertIntoDB = async (user: IJWTPayload, payload: any) => {
     },
   });
 
-  if (patientData.id !== appointmentData.patientId) {
-    throw new ApiError(httpStatus.BAD_REQUEST, "This is not your appointment");
+  if (appointmentData.paymentStatus !== PaymentStatus.PAID) {
+    throw new ApiError(
+      httpStatus.BAD_REQUEST,
+      "Payment must be completed before submitting a review",
+    );
   }
 
-  return await prisma.$transaction(async (tnx) => {
-    const result = await tnx.review.create({
+  if (!(patientData.id === appointmentData.patientId)) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "This is not your appointment!");
+  }
+
+  return await prisma.$transaction(async (tx) => {
+    const result = await tx.review.create({
       data: {
         appointmentId: appointmentData.id,
         doctorId: appointmentData.doctorId,
         patientId: appointmentData.patientId,
-        rating: parseFloat(payload.rating),
+        rating: payload.rating,
         comment: payload.comment,
       },
     });
 
-    const avgRating = await tnx.review.aggregate({
+    const averageRating = await tx.review.aggregate({
       _avg: {
         rating: true,
       },
-      where: {
-        doctorId: appointmentData.doctorId,
-      },
     });
 
-    await tnx.doctor.update({
+    await tx.doctor.update({
       where: {
-        id: appointmentData.doctorId,
+        id: result.doctorId,
       },
       data: {
-        averageRating: avgRating._avg.rating as number,
+        averageRating: averageRating._avg.rating as number,
       },
     });
 
     return result;
   });
 };
-const getAllFromDB = async (filters: any, options: IOptions) => {
+
+const getAllFromDB = async (filters: any, options: IPaginationOptions) => {
   const { limit, page, skip } = paginationHelper.calculatePagination(options);
   const { patientEmail, doctorEmail } = filters;
   const andConditions = [];
@@ -90,7 +100,7 @@ const getAllFromDB = async (filters: any, options: IOptions) => {
     include: {
       doctor: true,
       patient: true,
-      //appointment: true,
+      appointment: true,
     },
   });
   const total = await prisma.review.count({
