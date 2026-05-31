@@ -10,10 +10,14 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
     "migrate": "npx prisma migrate dev",
+    "build": "tsc",
+    "start": "node dist/server.js",
     "reset": "npx prisma migrate reset",
-    "commit": "git add . && git commit -m \" fix: edited  \" && git push",
+    "commit": "git add . && git commit -m \" chore: prepare for deployment  \" && git push",
     "generate": "npx prisma generate",
-    "studio": "npx prisma studio"
+    "studio": "npx prisma studio",
+    "postinstall": "prisma generate --schema=./prisma/schema",
+    "stripe:webhook": "stripe listen --forward-to localhost:5000/webhook"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.7.0",
