@@ -1,8 +1,5 @@
+import { PaymentStatus, UserRole } from "@prisma/client";
 import httpStatus from "http-status";
-import {
-  PaymentStatus,
-  UserRole,
-} from "../../../../prisma/src/generated/prisma/enums";
 import ApiError from "../../errors/ApiError";
 import { prisma } from "../../shared/prisma";
 import { IJWTPayload } from "../../types/common";

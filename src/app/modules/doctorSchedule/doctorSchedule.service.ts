@@ -1,5 +1,5 @@
+import { Prisma } from "@prisma/client";
 import httpStatus from "http-status";
-import { Prisma } from "../../../../prisma/src/generated/prisma/client";
 import ApiError from "../../errors/ApiError";
 import { IOptions, paginationHelper } from "../../helper/paginationHelper";
 import { prisma } from "../../shared/prisma";

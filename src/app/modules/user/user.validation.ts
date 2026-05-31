@@ -1,8 +1,5 @@
+import { Gender, UserStatus } from "@prisma/client";
 import z from "zod";
-import {
-  Gender,
-  UserStatus,
-} from "../../../../prisma/src/generated/prisma/enums";
 
 const createAdmin = z.object({
   password: z.string({

@@ -1,7 +1,7 @@
+import { UserStatus } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import httpStatus from "http-status";
 import { Secret } from "jsonwebtoken";
-import { UserStatus } from "../../../../prisma/src/generated/prisma/enums";
 import config from "../../../config";
 import ApiError from "../../errors/ApiError";
 import { jwtHelper } from "../../helper/jwtHelper";

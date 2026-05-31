@@ -1,8 +1,4 @@
-import {
-  Admin,
-  Prisma,
-  UserStatus,
-} from "../../../../prisma/src/generated/prisma/client";
+import { Admin, Prisma, UserStatus } from "@prisma/client";
 import { IOptions, paginationHelper } from "../../helper/paginationHelper";
 import { prisma } from "../../shared/prisma";
 

@@ -1,8 +1,4 @@
-import {
-  Doctor,
-  Prisma,
-  UserStatus,
-} from "../../../../prisma/src/generated/prisma/client";
+import { Doctor, Prisma, UserStatus } from "@prisma/client";
 import { askOpenRouter } from "../../helper/openRouterClient";
 import { paginationHelper } from "../../helper/paginationHelper";
 import { IPaginationOptions } from "../../interfaces/pagination";

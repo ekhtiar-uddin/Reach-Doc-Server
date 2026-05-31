@@ -70,7 +70,7 @@ model Patient {
 
   user              User               @relation(references: [email], fields: [email])
   patientHealthData PatientHealthData?
-  medicalReport     MedicalReport[]
+  medicalReports      MedicalReport[]
   appointment       Appointment[]
   prescription      Prescription[]
   review            Review[]

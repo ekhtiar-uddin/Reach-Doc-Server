@@ -1,4 +1,4 @@
-import { UserRole } from "../../../prisma/src/generated/prisma/enums";
+import { UserRole } from "@prisma/client";
 
 export type IAuthUser = {
   email: string;

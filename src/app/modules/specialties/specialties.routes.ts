@@ -3,7 +3,7 @@ import { SpecialtiesController } from "./specialties.controller";
 
 import auth from "../../middlewares/auth";
 
-import { UserRole } from "../../../../prisma/src/generated/prisma/enums";
+import { UserRole } from "@prisma/client";
 import { fileUploader } from "../../helper/fileUploader";
 import { SpecialtiesValidtaion } from "./specialities.validation";
 

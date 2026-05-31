@@ -1,11 +1,12 @@
 import httpStatus from "http-status";
 import { v4 as uuidv4 } from "uuid";
+
 import {
   AppointmentStatus,
   PaymentStatus,
   Prisma,
   UserRole,
-} from "../../../../prisma/src/generated/prisma/client";
+} from "@prisma/client";
 import ApiError from "../../errors/ApiError";
 import { paginationHelper } from "../../helper/paginationHelper";
 import { stripe } from "../../helper/stripe";

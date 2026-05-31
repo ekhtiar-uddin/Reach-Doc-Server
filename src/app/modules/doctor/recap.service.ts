@@ -1,4 +1,4 @@
-import { Prisma } from "../../../../prisma/src/generated/prisma/client";
+import { Prisma } from "@prisma/client";
 import { IOptions, paginationHelper } from "../../helper/paginationHelper";
 import { prisma } from "../../shared/prisma";
 import { doctorSearchableFields } from "./doctor.constant";

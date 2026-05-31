@@ -1,9 +1,5 @@
+import { AppointmentStatus, Prescription, Prisma } from "@prisma/client";
 import httpStatus from "http-status";
-import {
-  AppointmentStatus,
-  Prescription,
-  Prisma,
-} from "../../../../prisma/src/generated/prisma/client";
 import ApiError from "../../errors/ApiError";
 import { paginationHelper } from "../../helper/paginationHelper";
 import { IAuthUser } from "../../interfaces/common";

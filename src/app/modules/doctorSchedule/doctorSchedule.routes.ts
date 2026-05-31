@@ -1,6 +1,6 @@
 import express from "express";
 
-import { UserRole } from "../../../../prisma/src/generated/prisma/enums";
+import { UserRole } from "@prisma/client";
 import auth from "../../middlewares/auth";
 import validateRequest from "../../middlewares/validateRequest";
 import { DoctorScheduleController } from "./doctorSchedule.controller";

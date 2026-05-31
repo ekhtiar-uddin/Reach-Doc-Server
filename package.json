@@ -13,7 +13,7 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "reset": "npx prisma migrate reset",
-    "commit": "git add . && git commit -m \" chore: prepare for deployment  \" && git push",
+    "commit": "git add . && git commit -m \" chore: updated prisma configuration for deployment and solved 30 type errors  \" && git push",
     "generate": "npx prisma generate",
     "studio": "npx prisma studio",
     "postinstall": "prisma generate --schema=./prisma/schema",

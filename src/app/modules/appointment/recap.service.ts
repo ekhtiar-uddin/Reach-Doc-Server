@@ -1,7 +1,4 @@
-import {
-  Prisma,
-  UserRole,
-} from "../../../../prisma/src/generated/prisma/client";
+import { Prisma, UserRole } from "@prisma/client";
 import { IOptions, paginationHelper } from "../../helper/paginationHelper";
 import { prisma } from "../../shared/prisma";
 import { IJWTPayload } from "../../types/common";

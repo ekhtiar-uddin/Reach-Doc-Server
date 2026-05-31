@@ -1,5 +1,5 @@
+import { UserRole } from "@prisma/client";
 import express, { NextFunction, Request, Response } from "express";
-import { UserRole } from "../../../../prisma/src/generated/prisma/enums";
 import auth from "../../middlewares/auth";
 import { authLimiter } from "../../middlewares/rateLimiter";
 import { AuthController } from "./auth.controller";

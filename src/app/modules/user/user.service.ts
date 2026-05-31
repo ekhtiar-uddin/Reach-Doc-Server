@@ -1,15 +1,13 @@
-import bcrypt from "bcryptjs";
-import { Request } from "express";
 import {
   Admin,
   Doctor,
   Patient,
   Prisma,
-} from "../../../../prisma/src/generated/prisma/client";
-import {
   UserRole,
   UserStatus,
-} from "../../../../prisma/src/generated/prisma/enums";
+} from "@prisma/client";
+import bcrypt from "bcryptjs";
+import { Request } from "express";
 import { fileUploader } from "../../helper/fileUploader";
 import { paginationHelper } from "../../helper/paginationHelper";
 import { prisma } from "../../shared/prisma";
@@ -17,7 +15,8 @@ import { prisma } from "../../shared/prisma";
 import config from "../../../config";
 import { IAuthUser } from "../../interfaces/common";
 import { IPaginationOptions } from "../../interfaces/pagination";
-import { userSearchableFields } from "./user.constant";
+import { userSearchAbleFields } from "./user.constant";
+
 // import { Prisma } from "../../../../prisma/src/generated/prisma/browser";
 const createAdmin = async (req: Request): Promise<Admin> => {
   const file = req.file;
@@ -187,7 +186,7 @@ const getAllFromDB = async (params: any, options: IPaginationOptions) => {
 
   if (params.searchTerm) {
     andConditions.push({
-      OR: userSearchableFields.map((field) => ({
+      OR: userSearchAbleFields.map((field) => ({
         [field]: {
           contains: params.searchTerm,
           mode: "insensitive",
@@ -361,7 +360,8 @@ const getMyProfile = async (user: IAuthUser) => {
         createdAt: true,
         updatedAt: true,
         patientHealthData: true,
-        medicalReport: {
+        // ami medicalReports korechi , age medicalReport chilo
+        medicalReports: {
           select: {
             id: true,
             patientId: true,

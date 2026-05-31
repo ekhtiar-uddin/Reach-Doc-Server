@@ -1,5 +1,5 @@
+import { UserRole } from "@prisma/client";
 import express from "express";
-import { UserRole } from "../../../../prisma/src/generated/prisma/enums";
 import auth from "../../middlewares/auth";
 import { PatientController } from "./patient.controller";
 

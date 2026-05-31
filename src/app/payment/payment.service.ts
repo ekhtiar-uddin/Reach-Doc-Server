@@ -1,8 +1,8 @@
-import Stripe from "stripe";
-import { PaymentStatus } from "../../../prisma/src/generated/prisma/enums";
+import { PaymentStatus } from "@prisma/client";
 import { prisma } from "../shared/prisma";
 
-const handleStripeWebhookEvent = async (event: Stripe.Event) => {
+// event: Stripe.Event
+const handleStripeWebhookEvent = async (event: any) => {
   switch (event.type) {
     case "checkout.session.completed": {
       const session = event.data.object as any;
