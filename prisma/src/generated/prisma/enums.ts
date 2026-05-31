@@ -10,10 +10,10 @@
 */
 
 export const UserRole = {
-  PATIENT: 'PATIENT',
-  DOCTOR: 'DOCTOR',
+  SUPER_ADMIN: 'SUPER_ADMIN',
   ADMIN: 'ADMIN',
-  SUPER_ADMIN: 'SUPER_ADMIN'
+  DOCTOR: 'DOCTOR',
+  PATIENT: 'PATIENT'
 } as const
 
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
@@ -36,24 +36,6 @@ export const Gender = {
 export type Gender = (typeof Gender)[keyof typeof Gender]
 
 
-export const AppointmentStatus = {
-  SCHEDULED: 'SCHEDULED',
-  INPROGRESS: 'INPROGRESS',
-  COMPLETED: 'COMPLETED',
-  CANCEL: 'CANCEL'
-} as const
-
-export type AppointmentStatus = (typeof AppointmentStatus)[keyof typeof AppointmentStatus]
-
-
-export const PaymentStatus = {
-  PAID: 'PAID',
-  UNPAID: 'UNPAID'
-} as const
-
-export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
-
-
 export const BloodGroup = {
   A_POSITIVE: 'A_POSITIVE',
   B_POSITIVE: 'B_POSITIVE',
@@ -74,3 +56,21 @@ export const MaritalStatus = {
 } as const
 
 export type MaritalStatus = (typeof MaritalStatus)[keyof typeof MaritalStatus]
+
+
+export const AppointmentStatus = {
+  SCHEDULED: 'SCHEDULED',
+  INPROGRESS: 'INPROGRESS',
+  COMPLETED: 'COMPLETED',
+  CANCELED: 'CANCELED'
+} as const
+
+export type AppointmentStatus = (typeof AppointmentStatus)[keyof typeof AppointmentStatus]
+
+
+export const PaymentStatus = {
+  PAID: 'PAID',
+  UNPAID: 'UNPAID'
+} as const
+
+export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]

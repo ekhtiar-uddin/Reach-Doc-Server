@@ -2,64 +2,48 @@ import { Request, Response } from "express";
 import httpStatus from "http-status";
 
 import pick from "../../helper/pick";
+import { IAuthUser } from "../../interfaces/common";
 import catchAsync from "../../shared/catchAsync";
 import sendResponse from "../../shared/sendResponse";
-import { IJWTPayload } from "../../types/common";
 import { appointmentFilterableFields } from "./appointment.constant";
 import { AppointmentService } from "./appointment.service";
 
 const createAppointment = catchAsync(
-  async (req: Request & { user?: IJWTPayload }, res: Response) => {
+  async (req: Request & { user?: IAuthUser }, res: Response) => {
     const user = req.user;
+
     const result = await AppointmentService.createAppointment(
-      user as IJWTPayload,
+      user as IAuthUser,
       req.body,
     );
 
     sendResponse(res, {
-      statusCode: 201,
+      statusCode: httpStatus.OK,
       success: true,
-      message: "Appointment create successfully",
+      message: "Appointment booked successfully!",
       data: result,
     });
   },
 );
+
 const getMyAppointment = catchAsync(
-  async (req: Request & { user?: IJWTPayload }, res: Response) => {
-    const options = pick(req.query, ["page", "limit", "sortBy", "sortOrder"]);
-    const filters = pick(req.query, ["status", "paymentStatus"]);
+  async (req: Request & { user?: IAuthUser }, res: Response) => {
     const user = req.user;
+    const filters = pick(req.query, ["status", "paymentStatus"]);
+    const options = pick(req.query, ["limit", "page", "sortBy", "sortOrder"]);
+
     const result = await AppointmentService.getMyAppointment(
-      user as IJWTPayload,
+      user as IAuthUser,
       filters,
       options,
     );
 
     sendResponse(res, {
-      statusCode: 201,
+      statusCode: httpStatus.OK,
       success: true,
-      message: "Appointment create successfully",
-      data: result,
-    });
-  },
-);
-
-const updateAppointmentStatus = catchAsync(
-  async (req: Request & { user?: IJWTPayload }, res: Response) => {
-    const { id } = req.params;
-    const { status } = req.body;
-    const user = req.user;
-    const result = await AppointmentService.updateAppointmentStatus(
-      id,
-      status,
-      user as IJWTPayload,
-    );
-
-    sendResponse(res, {
-      statusCode: 201,
-      success: true,
-      message: "Appointment create successfully",
-      data: result,
+      message: "My Appointment retrive successfully",
+      data: result.data,
+      meta: result.meta,
     });
   },
 );
@@ -77,9 +61,67 @@ const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const changeAppointmentStatus = catchAsync(
+  async (req: Request & { user?: IAuthUser }, res: Response) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    const user = req.user;
+
+    const result = await AppointmentService.updateAppointmentStatus(
+      id,
+      status,
+      user as IAuthUser,
+    );
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Appointment status changed successfully",
+      data: result,
+    });
+  },
+);
+
+const createAppointmentWithPayLater = catchAsync(
+  async (req: Request & { user?: IAuthUser }, res: Response) => {
+    const user = req.user;
+
+    const result = await AppointmentService.createAppointmentWithPayLater(
+      user as IAuthUser,
+      req.body,
+    );
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Appointment booked successfully! You can pay later.",
+      data: result,
+    });
+  },
+);
+
+const initiatePayment = catchAsync(
+  async (req: Request & { user?: IAuthUser }, res: Response) => {
+    const user = req.user;
+    const { id } = req.params;
+
+    const result = await AppointmentService.initiatePaymentForAppointment(
+      id,
+      user as IAuthUser,
+    );
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Payment session created successfully",
+      data: result,
+    });
+  },
+);
 export const AppointmentController = {
   createAppointment,
   getMyAppointment,
   getAllFromDB,
-  updateAppointmentStatus,
+  changeAppointmentStatus,
+  createAppointmentWithPayLater,
+  initiatePayment,
 };
